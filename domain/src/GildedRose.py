@@ -28,4 +28,37 @@ class NormalItem(Item, Updateable):
     def __init__(self, name, sell_in, quality):
         Item.__init__(self, name, sell_in, quality)
 
-    def setSell
+    def setSell_in(self):
+        self.sell_in = self.sell_in - 1
+
+    def setQuality(self, valor):
+        if self.quality + valor > 50:
+            self.quality = 50
+        elif self.quality + valor >= 0:
+            self.quality = self.quality + valor
+        else:
+            self.quality = 0
+        assert 0 <= self.quality <= 50
+
+    def update_quality(self):
+        if self.sell_in > 0:
+            self.setQuality(-1)
+        else:
+            self.setQuality(-2)
+        self.setSell_in()
+
+
+
+
+class ConjuredItem(NormalItem):
+
+    def __init__(self, name, sell_in, quality):
+        NormalItem().__init__(self, name, sell_in, quality)
+
+    # Heradado de la superclase "NormalItem"
+    def update_quality(self):
+        if self.sell_in >= 0:
+            self.setQuality(-2)
+        else:
+            self.setQuality(-4)
+        self.setSell_in()
