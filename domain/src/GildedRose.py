@@ -1,10 +1,12 @@
 class GildedRose():
+    
     def __init__(self, items):
         self.items = items
 
 
 
 class Inventory(GildedRose):
+    
     def update_quality(self):
         for item in self.items:
             item.update_quality()
@@ -12,6 +14,7 @@ class Inventory(GildedRose):
 
 
 class Item:
+
     def __init__(self, name, sell_in, quality):
         self.name = name
         self.sell_in = sell_in
@@ -21,10 +24,12 @@ class Item:
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
 class Updateable():
+
     def update_quality():
         pass
 
 class NormalItem(Item, Updateable):
+
     def __init__(self, name, sell_in, quality):
         Item.__init__(self, name, sell_in, quality)
 
@@ -48,8 +53,6 @@ class NormalItem(Item, Updateable):
         self.setSell_in()
 
 
-
-
 class ConjuredItem(NormalItem):
 
     def __init__(self, name, sell_in, quality):
@@ -62,3 +65,37 @@ class ConjuredItem(NormalItem):
         else:
             self.setQuality(-4)
         self.setSell_in()
+
+
+class AgedBrie(NormalItem):
+
+    def __init__(self, name, sell_in, quality):
+        NormalItem.__init__(self, name, sell_in, quality)
+
+    def setQuality(self, valor):
+        NormalItem.setQuality(self, valor)
+
+    def update_quality(self):
+        if self.sell_in > 0:
+            self.setQuality(1)
+        else:
+            self.setQuality(2)
+        self.setSell_in()
+
+
+class Backstage(NormalItem):
+
+    def __init__(self, name, sell_in, quality):
+        NormalItem.__init__(self, name, sell_in, quality)
+
+    def update_quality(self):
+        if self.sell_in > 10:
+            self.setQuality(1)
+        elif self.sell_in > 5:
+            self.setQuality(2)
+        elif self.sell_in > 0:
+            self.setQuality(3)
+        else:
+            self.quality = 0
+        self.setSell_in()
+        
