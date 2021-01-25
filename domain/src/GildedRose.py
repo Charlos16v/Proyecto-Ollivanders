@@ -1,16 +1,14 @@
 class GildedRose():
-    
+
     def __init__(self, items):
         self.items = items
 
 
-
 class Inventory(GildedRose):
-    
+
     def update_quality(self):
         for item in self.items:
             item.update_quality()
-
 
 
 class Item:
@@ -23,10 +21,12 @@ class Item:
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
+
 class Updateable():
 
     def update_quality():
         pass
+
 
 class NormalItem(Item, Updateable):
 
@@ -98,4 +98,3 @@ class Backstage(NormalItem):
         else:
             self.quality = 0
         self.setSell_in()
-        
