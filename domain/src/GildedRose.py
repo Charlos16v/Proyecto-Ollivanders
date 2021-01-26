@@ -56,7 +56,7 @@ class NormalItem(Item, Updateable):
 class ConjuredItem(NormalItem):
 
     def __init__(self, name, sell_in, quality):
-        NormalItem().__init__(self, name, sell_in, quality)
+        Item().__init__(self, name, sell_in, quality)
 
     # Heradado de la superclase "NormalItem"
     def update_quality(self):
@@ -70,10 +70,10 @@ class ConjuredItem(NormalItem):
 class AgedBrie(NormalItem):
 
     def __init__(self, name, sell_in, quality):
-        NormalItem.__init__(self, name, sell_in, quality)
+        Item.__init__(self, name, sell_in, quality)
 
     def setQuality(self, valor):
-        NormalItem.setQuality(self, valor)
+        Item.setQuality(self, valor)
 
     def update_quality(self):
         if self.sell_in > 0:
@@ -86,7 +86,7 @@ class AgedBrie(NormalItem):
 class Backstage(NormalItem):
 
     def __init__(self, name, sell_in, quality):
-        NormalItem.__init__(self, name, sell_in, quality)
+        Item.__init__(self, name, sell_in, quality)
 
     def update_quality(self):
         if self.sell_in > 10:
@@ -98,3 +98,12 @@ class Backstage(NormalItem):
         else:
             self.quality = 0
         self.setSell_in()
+
+
+class Sulfuras(Item, Updateable):
+    def __init__(self, name, sell_in, quality):
+        Item.__init__(self, name, sell_in, quality)
+
+    def update_quality(self):
+        assert self.quality == 80
+        pass
